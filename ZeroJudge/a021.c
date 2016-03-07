@@ -239,10 +239,10 @@ struct BigNumber div(struct BigNumber *A, struct BigNumber *B)
 		return result;
 	}
 
-	set_value(÷nd, "0");
+	set_value(&dividend, "0");
 	for (i = A->length - 1; i>=0; i--)
 	{
-		mul_10(÷nd);
+		mul_10(&dividend);
 		dividend.arr[0] = A->arr[i];
 
 		if (dividend.length < B->length)
@@ -250,9 +250,9 @@ struct BigNumber div(struct BigNumber *A, struct BigNumber *B)
 		for (j = 9; j > 0; j--)
 		{
 			mul_scale(B, &tmp, j, 1);
-			if (compare(÷nd, &tmp) >= 0)
+			if (compare(&dividend, &tmp) >= 0)
 			{
-				dividend = sub(÷nd, &tmp);
+				dividend = sub(&dividend, &tmp);
 				result.arr[i] = j;
 				break;
 			}
