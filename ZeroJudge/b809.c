@@ -48,8 +48,6 @@ int main(void)
 	}
 
 	while (scanf("%d", &y) != EOF) {
-		if (arr[y] > 9)
-			arr[y] -= 9;
 		if (y < 10)
 			k = y;
 		else if (y < 100)
