@@ -1,16 +1,13 @@
 import sys
 
-ans = bytearray()
 n = None
 
-def dfs(i, y):
+def dfs(i, y, ans):
   for j in range(i, 2 * y + 1):
     if y == n:
       sys.stdout.buffer.write(ans[:j] + b'()' + ans[j:])
     else:
-      ans[j:j] = b'()'
-      dfs(j + 1, y + 1)
-      ans[j:j + 2] = []
+      dfs(j + 1, y + 1, ans[:j] + b'()' + ans[j:])
 
 while True:
   try:
@@ -18,7 +15,6 @@ while True:
       n = int(input()) - 1
     except ValueError:
       continue
-    ans[:] = b'\n'
-    dfs(0, 0)
+    dfs(0, 0, b'\n')
   except EOFError:
     break
