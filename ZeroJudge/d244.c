@@ -1,13 +1,11 @@
 #include <stdio.h>
 
 int main(void) {
-    unsigned int n, a = 0, b = 0, c;
-    while (scanf("%u", &n) != EOF) {
-        c = n & 0x55555555U;
-        a += c - (a & (c * 2)) / 2 * 3;
-        c = n & 0xAAAAAAAAU;
-        b += c / 2 - (b & c) / 2 * 3;
+    unsigned long n, a = 0;
+    while (scanf("%lu", &n) != EOF) {
+        n = ((n & 0x55555555UL) << 33) | (n & 0xAAAAAAAAUL);
+        a += (n - (a & n) * 3) / 2;
     }
-    printf("%u\n", b + a / 2);
+    printf("%lu\n", (a & 0xAAAAAAAAUL) | (a >> 33));
     return 0;
 }
